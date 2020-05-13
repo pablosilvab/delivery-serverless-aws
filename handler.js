@@ -3,6 +3,7 @@
 const { v4: uuidv4 } = require('uuid');
 
 module.exports.makeOrder = async event => {
+  console.log('Make Order Function');
   const orderId = uuidv4(); 
 
   return {

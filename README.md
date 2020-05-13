@@ -38,7 +38,7 @@ serverless deploy
 
 ## Issues
 
-Ver logs 
+Ver logs con serverless framework
 ```
 serverless logs -f makeOrder -t
 ```
