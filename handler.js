@@ -1,12 +1,15 @@
 'use strict';
 
-module.exports.hello = async event => {
+const uuid = require('uuid/v1');
+
+module.exports.makeOrder = async event => {
+  const orderID = uuid();
+
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
-        input: event,
+        message: 'El pedido fue registrado con el numero de orden ${orderID}'
       },
       null,
       2
