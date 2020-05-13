@@ -9,6 +9,12 @@ provider:
     PENDING_ORDERS_QUEUE:
       Ref: PendingOrdersQueue
   
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:SendMessage"
+      Resource: "arn:aws:sqs:${self:provider.region}:*:PendingOrdersQueue"
+
 functions:
   makeOrder:
     handler: handler.makeOrder
