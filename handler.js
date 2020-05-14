@@ -8,14 +8,24 @@ const QUEUE_URL = process.env.PENDING_ORDERS_QUEUE
 
 module.exports.makeOrder = (event, context, callback) => {
 	console.log('makeOrder function called');
+
+	// TODO: validate request
+	let body = JSON.parse(event.body)
+
 	const orderId = uuidv4();
 
 	const params = {
-		MessageBody: JSON.stringify({ orderId: orderId }),
+		MessageBody: JSON.stringify({ 
+			orderId: orderId,
+			name: body.name,
+			address: body.address,
+			pizzas: body.pizzas
+		}),
 		QueueUrl: QUEUE_URL
 	};
 
 	sqs.sendMessage(params, function(err, data) {
+		console.log(data);
 		if (err) {
 			sendResponse(500, err, callback);
 		} else {
@@ -27,6 +37,13 @@ module.exports.makeOrder = (event, context, callback) => {
 		}
 	});
 };
+
+module.exports.prepareOrder = (event, context, callback) => {
+	console.log('prepareOrder function called');
+	console.log(event);
+
+	callback();
+}
 
 function sendResponse(statusCode, message, callback) {
 	const response = {

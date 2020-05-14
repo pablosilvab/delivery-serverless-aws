@@ -23,6 +23,15 @@ functions:
       - http:
           method: post
           path: order
+  prepareOrder:
+    handler: handler.prepareOrder
+    events:
+      - sqs:
+          arn: # Amazon Resource Name
+            Fn::GetAtt:
+              - PendingOrdersQueue
+              - Arn
+          batchSize: 1 
 
 resources:
   Resources:
