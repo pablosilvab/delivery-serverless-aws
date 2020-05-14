@@ -38,6 +38,18 @@ serverless config credentials --provider aws --key <access-key> --secret <secres
 serverless deploy
 ```
 
+### Ejemplo 
+
+Request: POST
+
+```
+{
+	"name": "Walter",
+	"address": "308 Negra Arroyo Lane",
+	"pizzas": ["margarita", "napolitana"]
+}
+```
+
 ## Issues
 
 Ver logs con serverless framework
