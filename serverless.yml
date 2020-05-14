@@ -9,6 +9,7 @@ provider:
     PENDING_ORDERS_QUEUE:
       Ref: PendingOrdersQueue
     PENDING_ORDERS_QUEUE_NAME: PendingOrdersQueue
+    COMPLETED_ORDER_TABLE: CompletedOrderTable
   
   iamRoleStatements:
     - Effect: "Allow"
@@ -39,3 +40,16 @@ resources:
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "${self:provider.environment.PENDING_ORDERS_QUEUE_NAME}"
+    CompletedOrdersTable:               # Resource Name
+      Type: "AWS::DynamoDB::Table"      # Resource Type
+      Properties:
+        AttributeDefinitions:       
+        - AttributeName: "orderId"      # Key Database
+          AttributeType: "S"
+        KeySchema:
+        - AttributeName: "orderId"
+          KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.COMPLETED_ORDER_TABLE}
