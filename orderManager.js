@@ -26,7 +26,7 @@ module.exports.deliverOrder = orderId => {
 			orderId
 		},
 		ConditionExpression: 'attribute_exists(orderId)',
-		UpdateExpression: 'set delivery_status = :v',
+		UpdateExpression: 'set deliveryStatus = :v',
 		ExpressionAttributeValues: {
 			':v': 'DELIVERED'
 		},
