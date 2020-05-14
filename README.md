@@ -1,13 +1,14 @@
 # Delivery Serverless AWS
 El objetivo de este proyecto es probar AWS Lambda. 
 
-## Requisitos 
+## Herramientas utilizadas 
 
 * Serverless Framework 
-
-```
-sudo npm install -g serverless
-```
+* AWS Lambda
+* API Gateway
+* SQS
+* Dynamo DB
+* CloudFormation
 
 ## Deploy 
 Esta función fue construida con Serverless Framework. 
@@ -41,4 +42,11 @@ serverless deploy
 Ver logs con serverless framework
 ```
 serverless logs -f makeOrder -t
+```
+
+### Instalaciones 
+
+
+```
+sudo npm install -g serverless
 ```
