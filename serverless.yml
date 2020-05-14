@@ -6,16 +6,16 @@ provider:
   region: us-east-2
   environment:
     REGION: ${self:provider.region}
-    PENDING_ORDERS_QUEUE:
+    PENDING_ORDER_QUEUE:
       Ref: PendingOrdersQueue
-    PENDING_ORDERS_QUEUE_NAME: PendingOrdersQueue
+    PENDING_ORDER_QUEUE_NAME: PendingOrdersQueue
     COMPLETED_ORDER_TABLE: CompletedOrderTable
-  
+
   iamRoleStatements:
     - Effect: "Allow"
       Action:
         - "sqs:SendMessage"
-      Resource: "arn:aws:sqs:${self:provider.region}:*:${self:provider.environment.PENDING_ORDERS_QUEUE_NAME}"
+      Resource: "arn:aws:sqs:${self:provider.region}:*:${self:provider.environment.PENDING_ORDER_QUEUE_NAME}"
     - Effect: "Allow"
       Action:
         - "dynamodb:GetItem"
@@ -26,33 +26,44 @@ provider:
         - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.COMPLETED_ORDER_TABLE}"
 
 functions:
-  makeOrder:  # AWS Lambda
+  makeOrder:
     handler: handler.makeOrder
     events:
-      - http: # API Gateway
+      - http:
           method: post
           path: order
   prepareOrder:
     handler: handler.prepareOrder
     events:
       - sqs:
-          arn: # Amazon Resource Name
+          arn:
             Fn::GetAtt:
               - PendingOrdersQueue
               - Arn
-          batchSize: 1 
+          batchSize: 1
+  sendOrder:
+    handler: handler.sendOrder
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 1
+          startingPosition: LATEST
+          arn:
+            Fn::GetAtt:
+              - CompletedOrdersTable
+              - StreamArn
 
 resources:
   Resources:
-    PendingOrdersQueue: # SQS Queue Name
+    PendingOrdersQueue:
       Type: "AWS::SQS::Queue"
       Properties:
-        QueueName: "${self:provider.environment.PENDING_ORDERS_QUEUE_NAME}"
-    CompletedOrdersTable:               # Resource Name
-      Type: "AWS::DynamoDB::Table"      # Resource Type
+        QueueName: ${self:provider.environment.PENDING_ORDER_QUEUE_NAME}
+    CompletedOrdersTable:
+      Type: "AWS::DynamoDB::Table"
       Properties:
-        AttributeDefinitions:       
-        - AttributeName: "orderId"      # Key Database
+        AttributeDefinitions:
+        - AttributeName: "orderId"
           AttributeType: "S"
         KeySchema:
         - AttributeName: "orderId"
@@ -61,3 +72,5 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:provider.environment.COMPLETED_ORDER_TABLE}
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
