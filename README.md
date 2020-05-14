@@ -9,6 +9,7 @@ El objetivo de este proyecto es probar AWS Lambda.
 * SQS
 * Dynamo DB
 * CloudFormation
+* AWS SDK
 
 ## Deploy 
 Esta función fue construida con Serverless Framework. 
