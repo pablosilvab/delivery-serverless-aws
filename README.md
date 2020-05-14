@@ -44,8 +44,8 @@ Request: POST
 
 ```
 {
-	"name": "Walter",
-	"address": "308 Negra Arroyo Lane",
+	"name": "Walter Hartwell White",
+	"address": "308 Negra Arroyo Lane, Albuquerque, New Mexico, 87104",
 	"pizzas": ["margarita", "napolitana"]
 }
 ```
