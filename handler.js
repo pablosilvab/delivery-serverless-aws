@@ -19,12 +19,12 @@ module.exports.makeOrder = (event, context, callback) => {
     name: body.name,
     address: body.address,
     pizzas: body.pizzas,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
 
   const params = {
     MessageBody: JSON.stringify(order),
-    QueueUrl: QUEUE_URL
+    QueueUrl: QUEUE_URL,
   };
 
   console.log(params);
@@ -62,7 +62,6 @@ module.exports.sendOrder = (event, context, callback) => {
   const record = event.Records[0];
 
   if (record.eventName === "INSERT") {
-
     console.log("deliver order");
     const orderId = record.dynamodb.Keys.orderId.S;
 
@@ -79,6 +78,25 @@ module.exports.sendOrder = (event, context, callback) => {
     console.log("is not a new record");
     callback();
   }
+};
+
+module.exports.getOrderStatus = (event, context, callback) => {
+  console.log("getOrderStatus function called");
+  console.log(event);
+
+
+  orderManager.getStatusOrder(event.pathParameters.orderId)
+  .then((data) => {
+    console.log(data);
+    let message = `El estado de la orden: ${data.Item.orderId} es ${data.Item.deliveryStatus}`
+    sendResponse(200, message, callback);
+    callback();
+  })
+  .catch((error) => {
+    console.log(error);
+    sendResponse(500, error, callback);
+    callback(error);
+  });
 
 };
 

@@ -52,6 +52,12 @@ functions:
             Fn::GetAtt:
               - CompletedOrdersTable
               - StreamArn
+  getOrderStatus:
+    handler: handler.getOrderStatus
+    events:
+      - http:
+          method: get
+          path: order/{orderId}
 
 resources:
   Resources:
