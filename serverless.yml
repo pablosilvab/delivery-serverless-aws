@@ -17,10 +17,10 @@ provider:
       Resource: "arn:aws:sqs:${self:provider.region}:*:${self:provider.environment.PENDING_ORDERS_QUEUE_NAME}"
 
 functions:
-  makeOrder:
+  makeOrder:  # AWS Lambda
     handler: handler.makeOrder
     events:
-      - http:
+      - http: # API Gateway
           method: post
           path: order
   prepareOrder:
@@ -35,7 +35,7 @@ functions:
 
 resources:
   Resources:
-    PendingOrdersQueue:
+    PendingOrdersQueue: # SQS Queue Name
       Type: "AWS::SQS::Queue"
       Properties:
         QueueName: "${self:provider.environment.PENDING_ORDERS_QUEUE_NAME}"
