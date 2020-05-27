@@ -66,4 +66,4 @@ sudo npm install -g serverless
 
 ## Otros
 
-Proyecto relacionado con OpenFaaS, RabbitMQ y MySQL: [Kadev](https://gitlab.com/kadev-psb/send-order)
+Este proyecto se desarrolló con el mismo funcionamiento pero con otras herramientas: OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order)
