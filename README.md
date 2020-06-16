@@ -11,10 +11,19 @@ El objetivo de este proyecto es probar AWS Lambda.
 * CloudFormation
 * AWS SDK
 
-## Deploy 
-Esta función fue construida con Serverless Framework. 
+## Requerimientos 
 
-1. Creación de la función 
+* Tener npm instalado.
+* Tener serverless instalado.
+
+```
+sudo npm install -g serverless
+```
+
+## Deploy 
+Esta función fue construida con Serverless Framework, que es utilizado para organizar funciones y recursos, ya que provee una estructura clara y adopta el paradigma de IaaS.
+
+1. Creación de la función. Pueder usar la palabra `serverless` o simplemente `sls`. 
 
 ```
 serverless create --template aws-nodejs --name delivery-serverless-aws
@@ -50,6 +59,14 @@ Request: POST
 }
 ```
 
+### Eliminar proyecto 
+
+Para limpiar cuenta de AWS se debe ejecutar: 
+
+```
+sls remove
+```
+
 ## Issues
 
 Ver logs con serverless framework
@@ -57,14 +74,8 @@ Ver logs con serverless framework
 serverless logs -f makeOrder -t
 ```
 
-* Es importante asegurarte que tu archivo yml tenga la misma zona de localización que cuenta. 
+* Es importante asegurarte que tu archivo yml tenga la misma región de localización que cuenta. 
 
-### Instalaciones 
-
-
-```
-sudo npm install -g serverless
-```
 
 ## Otros
 
