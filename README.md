@@ -63,3 +63,7 @@ serverless logs -f makeOrder -t
 ```
 sudo npm install -g serverless
 ```
+
+## Otros
+
+Desarrollo con el mismo funcionamiento, pero con otras herramientas: OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order) 🚚🚚🚚
