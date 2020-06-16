@@ -26,12 +26,15 @@ provider:
         - "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.COMPLETED_ORDER_TABLE}"
 
 functions:
+  # This function is triggered by a POST http request with the order information.
   makeOrder:
     handler: handler.makeOrder
     events:
       - http:
           method: post
           path: order
+
+  # This function is triggered when 1 element is enqueued in a queue called PendingOrdersQueue.
   prepareOrder:
     handler: handler.prepareOrder
     events:
@@ -41,17 +44,21 @@ functions:
               - PendingOrdersQueue
               - Arn
           batchSize: 1
+
+  # This function is triggered when 3 elements are inserted in the table CompletedOrdersTable in DynamoDB.
   sendOrder:
     handler: handler.sendOrder
     events:
       - stream:
           type: dynamodb
-          batchSize: 1
+          batchSize: 3
           startingPosition: LATEST
           arn:
             Fn::GetAtt:
               - CompletedOrdersTable
               - StreamArn
+
+  # This function is triggered by a GET http request with the order ID.
   getOrderStatus:
     handler: handler.getOrderStatus
     events:
