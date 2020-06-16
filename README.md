@@ -57,6 +57,8 @@ Ver logs con serverless framework
 serverless logs -f makeOrder -t
 ```
 
+* Es importante asegurarte que tu archivo yml tenga la misma zona de localización que cuenta. 
+
 ### Instalaciones 
 
 

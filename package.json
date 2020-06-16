@@ -1,7 +1,7 @@
 {
   "name": "delivery-serverless-aws",
   "version": "1.0.0",
-  "description": "",
+  "description": "El objetivo de este proyecto es probar AWS Lambda.",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +12,14 @@
   "dependencies": {
     "aws-sdk": "^2.676.0",
     "uuid": "^8.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablosilvab/delivery-serverless-aws.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pablosilvab/delivery-serverless-aws/issues"
+  },
+  "homepage": "https://github.com/pablosilvab/delivery-serverless-aws#readme"
 }
