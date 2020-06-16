@@ -6,7 +6,7 @@ El objetivo de este proyecto es probar AWS Lambda.
 * Serverless Framework 
 * AWS Lambda
 * API Gateway
-* SQS
+* Simple Queue Service SQS
 * Dynamo DB
 * CloudFormation
 * AWS SDK
