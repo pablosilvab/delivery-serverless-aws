@@ -38,7 +38,7 @@ npm init -y
 3. Asegurarse que las credenciales de AWS estén configuradas. 
 
 ```
-serverless config credentials --provider aws --key <access-key> --secret <secres-access>
+serverless config credentials --provider aws --key <access-key> --secret <secret-access>
 ```
 
 4. Desplegar función
