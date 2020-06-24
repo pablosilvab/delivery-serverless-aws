@@ -11,6 +11,7 @@ const QUEUE_URL = process.env.PENDING_ORDER_QUEUE;
 module.exports.makeOrder = (event, context, callback) => {
   console.log("makeOrder function called");
 
+  console.log('event.body ---> ', event.body);
   // TODO: validate request
   let body = JSON.parse(event.body);
 
@@ -84,25 +85,30 @@ module.exports.getOrderStatus = (event, context, callback) => {
   console.log("getOrderStatus function called");
   console.log(event);
 
-
-  orderManager.getStatusOrder(event.pathParameters.orderId)
-  .then((data) => {
-    console.log(data);
-    let message = `El estado de la orden: ${data.Item.orderId} es ${data.Item.deliveryStatus}`
-    sendResponse(200, message, callback);
-    callback();
-  })
-  .catch((error) => {
-    console.log(error);
-    sendResponse(500, error, callback);
-    callback(error);
-  });
-
+  orderManager
+    .getStatusOrder(event.pathParameters.orderId)
+    .then((data) => {
+      console.log(data);
+      let message = `El estado de la orden: ${data.Item.orderId} es ${data.Item.deliveryStatus}`;
+      sendResponse(200, message, callback);
+      callback();
+    })
+    .catch((error) => {
+      console.log(error);
+      sendResponse(500, error, callback);
+      callback(error);
+    });
 };
 
 function sendResponse(statusCode, message, callback) {
   const response = {
     statusCode: statusCode,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      "Access-Control-Allow-Headers" : "Content-Type",
+    },
     body: JSON.stringify(message),
   };
   callback(null, response);
