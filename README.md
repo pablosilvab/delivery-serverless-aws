@@ -79,4 +79,4 @@ serverless logs -f makeOrder -t
 
 ## Otros
 
-Desarrollo con el mismo funcionamiento, pero con otras herramientas: OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order) 🚚🚚🚚
+Desarrollo con el mismo funcionamiento, pero con otras herramientas (OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order)) 🚚🚚🚚
