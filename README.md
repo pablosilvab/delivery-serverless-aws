@@ -1,53 +1,51 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
 # Delivery Serverless AWS
-El objetivo de este proyecto es probar AWS Lambda. 
 
-## Herramientas utilizadas 
+This project is an API for delivery built with Serverless framework in AWS infrastructure.
 
-* Serverless Framework 
+## Tools
+
+[![Node][node.js]][node-url]
+![aws]
+![amazon-db]
+
+* Serverless Framework
 * AWS Lambda
 * API Gateway
 * Simple Queue Service SQS
-* Dynamo DB
 * CloudFormation
 * AWS SDK
 
-## Requerimientos 
+## Requirements
 
-* Tener npm instalado.
-* Tener serverless instalado.
+* Node.js
+* npm
+* Serverless framework
 
 ```
 sudo npm install -g serverless
 ```
 
-## Deploy 
-Esta función fue construida con Serverless Framework, que es utilizado para organizar funciones y recursos, ya que provee una estructura clara y adopta el paradigma de IaaS.
+## Deployment
 
-1. Creación de la función. Pueder usar la palabra `serverless` o simplemente `sls`. 
 
-```
-serverless create --template aws-nodejs --name delivery-serverless-aws
-```
-
-2. Iniciar npm
-
-```
-npm init -y 
-```
-
-3. Asegurarse que las credenciales de AWS estén configuradas. 
+1. Make sure the credentials is set. 
 
 ```
 serverless config credentials --provider aws --key <access-key> --secret <secret-access>
 ```
 
-4. Desplegar función
+2. Deploy function
 
 ```
 serverless deploy
 ```
 
-### Ejemplo 
+### Example
 
 Request: POST
 
@@ -59,9 +57,9 @@ Request: POST
 }
 ```
 
-### Eliminar proyecto 
+### Remove project
 
-Para limpiar cuenta de AWS se debe ejecutar: 
+For clean AWS account you should run:
 
 ```
 sls remove
@@ -69,14 +67,33 @@ sls remove
 
 ## Issues
 
-Ver logs con serverless framework
+Watch logs in serverless framework
+
 ```
 serverless logs -f makeOrder -t
 ```
 
-* Es importante asegurarte que tu archivo yml tenga la misma región de localización que cuenta. 
+- It's important to make sure the yml file has the same localization region as your account.
+
+## Other
+
+* Same application with open source tools: (OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order)) 🚚🚚🚚
 
 
-## Otros
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/pablosilvab/delivery-serverless-aws.svg?style=for-the-badge
+[contributors-url]: https://github.com/pablosilvab/delivery-serverless-aws/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/pablosilvab/delivery-serverless-aws.svg?style=for-the-badge
+[forks-url]: https://github.com/pablosilvab/delivery-serverless-aws/network/members
+[stars-shield]: https://img.shields.io/github/stars/pablosilvab/delivery-serverless-aws.svg?style=for-the-badge
+[stars-url]: https://github.com/pablosilvab/delivery-serverless-aws/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pablosilvab/delivery-serverless-aws.svg?style=for-the-badge
+[issues-url]: https://github.com/pablosilvab/delivery-serverless-aws/issues
+[node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[node-url]: https://nodejs.org/es/
 
-Desarrollo con el mismo funcionamiento, pero con otras herramientas (OpenFaaS, RabbitMQ y MySQL -> [Kadev](https://gitlab.com/kadev-psb/send-order)) 🚚🚚🚚
+[aws]: https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white
+[amazon-db]: https://img.shields.io/badge/Amazon%20DynamoDB-4053D6?style=for-the-badge&logo=Amazon%20DynamoDB&logoColor=white
+
+
